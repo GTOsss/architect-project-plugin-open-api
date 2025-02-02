@@ -1,0 +1,66 @@
+openapi: 3.0.0
+info:
+  title: Method with params
+  version: 0.0.0
+
+paths:
+  /products:
+    get:
+      summary: Получить список продуктов
+      description: Возвращает список продуктов, отфильтрованных и отсортированных по заданным параметрам.
+      tags:
+        - Products
+      parameters:
+        - name: Authorization
+          in: header
+          description: Токен авторизации для доступа к API.
+          required: true
+          schema:
+            type: string
+        - name: category
+          in: query
+          description: Категория продуктов для фильтрации.
+          required: false
+          schema:
+            type: string
+        - name: sortBy
+          in: query
+          description: Поле для сортировки результатов.
+          required: false
+          schema:
+            type: string
+            enum: [name, price, date]
+        - name: sortOrder
+          in: query
+          description: Порядок сортировки (asc или desc).
+          required: false
+          schema:
+            type: string
+            enum: [asc, desc]
+      responses:
+        '200':
+          description: Успешный запрос. Возвращает список продуктов.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: integer
+                    name:
+                      type: string
+                    description:
+                      type: string
+                    price:
+                      type: number
+                      format: float
+                    category:
+                      type: string
+                    imageUrl:
+                      type: string
+        '401':
+          description: Не авторизован. Требуется токен авторизации.
+        '500':
+          description: Внутренняя ошибка сервера.

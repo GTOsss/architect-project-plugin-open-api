@@ -1,0 +1,102 @@
+openapi: 3.0.0
+info:
+  title: Responses
+  version: 0.0.0
+
+paths:
+  /users/me:
+    get:
+      responses:
+        200:
+          description: Get current user
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+  /users:
+    get:
+      responses:
+        200:
+          description: Get array of users
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/User'
+
+components:
+  schemas:
+    User:
+      type: object
+      required:
+        - id
+        - email
+      properties:
+        id:
+          type: integer
+          format: int64
+        email:
+          type: string
+          format: email
+        name:
+          type: string
+        # Для проверки неименованной схемы (которая не вынесена отдельно)
+        nestedObj:
+          type: object
+          properties:
+            name:
+              type: string
+            nestedSecondLvl:
+              type: object
+              properties:
+                end:
+                  type: string
+        roleEnumUnnamed:
+          type: string
+          # OpenAPI не позволяет сделать именованные значения enum как в typescript: `enum Role { user: 'user_role', ... }`
+          # По этому в typescript описать Enum можно только так: `"user_role" | "admin_role" | "guest_role"`
+          enum: [user_role, admin_role, guest_role]
+          # Эквивалентная запись массива:
+          # - user_role
+          # - admin_role
+          # - guest_role
+        roleEnumReferenced:
+          $ref: '#/components/schemas/RoleEnum'
+        tags:
+          type: array
+          items:
+            type: string
+        metadata:
+          type: object
+          additionalProperties:
+            type: string
+        birthDate:
+          type: string
+          format: date
+        score:
+          type: number
+          format: float
+          minimum: 0
+          maximum: 100
+        isActive:
+          type: boolean
+          default: true
+        address:
+          $ref: '#/components/schemas/Address'
+
+    Address:
+      type: object
+      properties:
+        street:
+          type: string
+        city:
+          type: string
+        country:
+          type: string
+        zipCode:
+          type: string
+
+    RoleEnum:
+      type: string
+      enum: ['admin', 'user', 'guest']

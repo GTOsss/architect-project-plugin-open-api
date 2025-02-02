@@ -1,0 +1,42 @@
+{
+  "name": "architect-project-plugin-open-api",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Goncharov Timofey gtosss@mail.ru",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "@babel/preset-env": "^7.26.7",
+    "@babel/preset-react": "^7.26.3",
+    "@babel/preset-typescript": "^7.26.0",
+    "@eslint/js": "^9.19.0",
+    "@types/fs-extra": "^11.0.4",
+    "@types/jest": "^29.5.14",
+    "@types/node": "^22.13.0",
+    "architect-project": "^2.0.7",
+    "babel-jest": "^29.7.0",
+    "eslint": "9.17.0",
+    "eslint-config-prettier": "^10.0.1",
+    "eslint-plugin-prettier": "^5.2.3",
+    "fs-extra": "^11.3.0",
+    "globals": "^15.14.0",
+    "jest": "^29.7.0",
+    "jest-environment-jsdom": "^29.7.0",
+    "openapi-types": "^12.1.3",
+    "prettier": "^3.4.2",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.7.3",
+    "typescript-eslint": "^8.22.0",
+    "yaml": "^2.7.0"
+  },
+  "peerDependencies": {
+    "architect-project": "^2.0.7"
+  },
+  "dependencies": {
+    "lodash.get": "^4.4.2",
+    "lodash.upperfirst": "^4.3.1"
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "compilerOptions": {
+    "jsx": "react",
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
+    "module": "commonjs",
+    "target": "es5",
+    "baseUrl": "./",
+    "types": ["jest", "node"],
+    "paths": {
+      "#/*": ["./src/*"]
+    }
+  },
+  "include": ["src", "index.d.ts", "architect"],
+  "exclude": ["src/**/*.test.ts"],
+  "references": [
+    {
+      "path": "./packages/back-dev-toolkit"
+    }
+  ]
+}

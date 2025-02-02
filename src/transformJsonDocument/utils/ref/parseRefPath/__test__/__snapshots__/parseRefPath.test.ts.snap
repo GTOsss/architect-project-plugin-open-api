@@ -1,0 +1,3 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`parseRefPath https://first/second 1`] = `"$ref as HTTP/HTTPS url currently not supported: https://first/second"`;

@@ -1,0 +1,163 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`toArrayMethods by openapi.mock.json DELETE /users/{id} 1`] = `
+{
+  "description": undefined,
+  "method": "delete",
+  "parametersMap": {
+    "header": [
+      {
+        "in": "header",
+        "name": "Authorization",
+        "required": true,
+        "type": "string",
+      },
+    ],
+    "path": [
+      {
+        "in": "path",
+        "name": "id",
+        "required": true,
+        "type": "number",
+      },
+    ],
+    "query": [],
+  },
+  "path": "/users/{id}",
+  "responseType": undefined,
+  "summary": "Delete user",
+  "tags": undefined,
+}
+`;
+
+exports[`toArrayMethods by openapi.mock.json GET /users 1`] = `
+{
+  "description": undefined,
+  "method": "get",
+  "parametersMap": {
+    "header": [
+      {
+        "in": "header",
+        "name": "Authorization",
+        "required": true,
+        "type": "string",
+      },
+    ],
+    "path": [],
+    "query": [
+      {
+        "in": "query",
+        "name": "page",
+        "required": false,
+        "type": "number",
+      },
+      {
+        "in": "query",
+        "name": "role",
+        "type": ""admin" | "user" | "guest"",
+      },
+    ],
+  },
+  "path": "/users",
+  "requestBodyType": undefined,
+  "responseType": "Array<User>",
+  "summary": "List users",
+  "tags": undefined,
+}
+`;
+
+exports[`toArrayMethods by openapi.mock.json PATCH /users/{id} 1`] = `
+{
+  "description": undefined,
+  "method": "patch",
+  "parametersMap": {
+    "header": [
+      {
+        "in": "header",
+        "name": "Authorization",
+        "required": true,
+        "type": "string",
+      },
+    ],
+    "path": [
+      {
+        "in": "path",
+        "name": "id",
+        "required": true,
+        "type": "number",
+      },
+    ],
+    "query": [],
+  },
+  "path": "/users/{id}",
+  "responseType": "User",
+  "summary": "Partially update user",
+  "tags": undefined,
+}
+`;
+
+exports[`toArrayMethods by openapi.mock.json POST /users 1`] = `
+{
+  "description": undefined,
+  "method": "post",
+  "parametersMap": {
+    "header": [
+      {
+        "in": "header",
+        "name": "Authorization",
+        "required": true,
+        "type": "string",
+      },
+    ],
+    "path": [],
+    "query": [],
+  },
+  "path": "/users",
+  "responseType": "User",
+  "summary": "Create user",
+  "tags": undefined,
+}
+`;
+
+exports[`toArrayMethods by openapi.mock.json PUT /users/{id} 1`] = `
+{
+  "description": undefined,
+  "method": "put",
+  "parametersMap": {
+    "header": [
+      {
+        "in": "header",
+        "name": "Authorization",
+        "required": true,
+        "type": "string",
+      },
+    ],
+    "path": [
+      {
+        "in": "path",
+        "name": "id",
+        "required": true,
+        "type": "number",
+      },
+    ],
+    "query": [],
+  },
+  "path": "/users/{id}",
+  "responseType": "User",
+  "summary": "Update user",
+  "tags": undefined,
+}
+`;
+
+exports[`toArrayMethods mock/cases responseTypes: responses200.yaml 1`] = `
+[
+  {
+    "path": "/users/me",
+    "responseType": "User",
+  },
+  {
+    "path": "/users",
+    "responseType": "Array<User>",
+  },
+]
+`;
