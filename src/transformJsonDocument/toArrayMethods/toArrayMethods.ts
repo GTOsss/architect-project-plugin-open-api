@@ -5,6 +5,8 @@ import { Method } from './toArrayMethods.types';
 import { resolveResponseType } from '../utils/resolveResponseType';
 import { Config } from '../types';
 import { resolveRequestBodyType } from '#/transformJsonDocument/utils/resolveRequestBodyType';
+import { methodNameByPath } from '#/transformJsonDocument/utils/pathUtils/methodNameByPath/methodNameByPath';
+import { urlGetterByPath } from '#/transformJsonDocument/utils/pathUtils/urlGetterByPath/urlGetterByPath';
 
 /**
  * Для обхода Open API методов.
@@ -68,7 +70,12 @@ export const toArrayMethods = (jsonDocument: OpenAPIV3.Document, config: Config)
        * */
       const requestBodyType = resolveRequestBodyType(jsonDocument, currentMethodData.requestBody, config);
 
+      const generatedMethodName = methodNameByPath(path);
+
+      const urlGetter = urlGetterByPath(path);
+
       acc.push({
+        generatedMethodName,
         path,
         method,
         description,
@@ -77,6 +84,7 @@ export const toArrayMethods = (jsonDocument: OpenAPIV3.Document, config: Config)
         parametersMap,
         responseType,
         requestBodyType,
+        urlGetter,
       });
     });
 

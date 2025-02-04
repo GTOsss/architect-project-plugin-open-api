@@ -15,6 +15,7 @@
     "@eslint/js": "^9.19.0",
     "@types/fs-extra": "^11.0.4",
     "@types/jest": "^29.5.14",
+    "@types/lodash": "^4.17.15",
     "@types/node": "^22.13.0",
     "architect-project": "^2.0.7",
     "babel-jest": "^29.7.0",
@@ -36,7 +37,6 @@
     "architect-project": "^2.0.7"
   },
   "dependencies": {
-    "lodash.get": "^4.4.2",
-    "lodash.upperfirst": "^4.3.1"
+    "lodash": "^4.17.21"
   }
 }

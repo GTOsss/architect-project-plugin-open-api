@@ -1,6 +1,6 @@
 import { parseRefPath } from '../parseRefPath';
 import { OpenAPIV3 } from 'openapi-types';
-import get from 'lodash.get';
+import { get } from 'lodash';
 import { isRefObject } from '../ref.typeGuards';
 
 /**

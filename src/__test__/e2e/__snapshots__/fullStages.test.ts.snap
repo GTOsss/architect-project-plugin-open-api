@@ -1,0 +1,111 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Full stages (Open API spec to code file) toCodeFile 1`] = `
+"// types ↓
+export type Error = { code: number,message: string },export type Address = { street: string,city: string,country: string,zipCode: string },export type User = { id: number,email: string,name: string,role: "user_role" | "admin_role" | "guest_role",address: Address,tags: Array<string>,metadata: AnyObject,birthDate: string,createdAt: string,score: number,isActive: boolean },export type RefToUser = User
+// methods ↓
+
+export type PostMethodNameUppercase = {
+  urlParams: urlparams,
+  queryParams: queryparams,
+  body: { email: string,name: string,role: "user" | "guest" },
+}
+
+export const postmethodName = ({
+  urlParams,
+  queryParams,
+  body,
+}: PostMethodNameUppercase): User => {
+  return axios.post(urlgeeter, body)
+}
+// ------- //
+
+export type GetMethodNameUppercase = {
+  urlParams: urlparams,
+  queryParams: queryparams,
+  body: undefined,
+}
+
+export const getmethodName = ({
+  urlParams,
+  queryParams,
+  body,
+}: GetMethodNameUppercase): Array<User> => {
+  return axios.post(urlgeeter, body)
+}
+// ------- //
+
+export type PutMethodNameUppercase = {
+  urlParams: urlparams,
+  queryParams: queryparams,
+  body: User,
+}
+
+export const putmethodName = ({
+  urlParams,
+  queryParams,
+  body,
+}: PutMethodNameUppercase): User => {
+  return axios.post(urlgeeter, body)
+}
+// ------- //
+
+export type PatchMethodNameUppercase = {
+  urlParams: urlparams,
+  queryParams: queryparams,
+  body: { name: string,role: "admin" | "user" | "guest" },
+}
+
+export const patchmethodName = ({
+  urlParams,
+  queryParams,
+  body,
+}: PatchMethodNameUppercase): User => {
+  return axios.post(urlgeeter, body)
+}
+// ------- //
+
+export type GetMethodNameUppercase = {
+  urlParams: urlparams,
+  queryParams: queryparams,
+  body: undefined,
+}
+
+export const getmethodName = ({
+  urlParams,
+  queryParams,
+  body,
+}: GetMethodNameUppercase): User => {
+  return axios.post(urlgeeter, body)
+}
+// ------- //
+
+export type DeleteMethodNameUppercase = {
+  urlParams: urlparams,
+  queryParams: queryparams,
+  body: undefined,
+}
+
+export const deletemethodName = ({
+  urlParams,
+  queryParams,
+  body,
+}: DeleteMethodNameUppercase): undefined => {
+  return axios.post(urlgeeter, body)
+}
+// ------- //
+
+export type PostMethodNameUppercase = {
+  urlParams: urlparams,
+  queryParams: queryparams,
+  body: Array<User>,
+}
+
+export const postmethodName = ({
+  urlParams,
+  queryParams,
+  body,
+}: PostMethodNameUppercase): Array<User> => {
+  return axios.post(urlgeeter, body)
+}"
+`;
