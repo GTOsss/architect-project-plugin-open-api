@@ -31,33 +31,33 @@ export type RefToUser = User;
 
 // ########################### methods ↓
 
-// ## post /users ##
+// ## POST /users ##
 
 export type PostUsersParams = {
   body: { email: string; name: string; role: 'user' | 'guest' };
 };
 
 /**
- * post /users
+ * POST /users
  * */
 export const postUsers = ({ body }: PostUsersParams): User => {
   return axios.post(getUrlUsers(), body);
 };
 
-// ## get /users ##
+// ## GET /users ##
 
 export type GetUsersParams = {
   queryParams: { page: number; role: 'admin' | 'user' | 'guest' };
 };
 
 /**
- * get /users
+ * GET /users
  * */
 export const getUsers = ({ queryParams }: GetUsersParams): Array<User> => {
   return axios.get(getUrlUsers(), null, { params: queryParams });
 };
 
-// ## put /users/{id} ##
+// ## PUT /users/{id} ##
 
 export type PutUsersByIdParams = {
   urlParams: { id: number };
@@ -65,13 +65,13 @@ export type PutUsersByIdParams = {
 };
 
 /**
- * put /users/{id}
+ * PUT /users/{id}
  * */
 export const putUsersById = ({ urlParams, body }: PutUsersByIdParams): User => {
   return axios.put(getUrlUsersById(urlParams), body);
 };
 
-// ## patch /users/{id} ##
+// ## PATCH /users/{id} ##
 
 export type PatchUsersByIdParams = {
   urlParams: { id: number };
@@ -79,46 +79,46 @@ export type PatchUsersByIdParams = {
 };
 
 /**
- * patch /users/{id}
+ * PATCH /users/{id}
  * */
 export const patchUsersById = ({ urlParams, body }: PatchUsersByIdParams): User => {
   return axios.patch(getUrlUsersById(urlParams), body);
 };
 
-// ## get /users/{id} ##
+// ## GET /users/{id} ##
 
 export type GetUsersByIdParams = {
   urlParams: { id: number };
 };
 
 /**
- * get /users/{id}
+ * GET /users/{id}
  * */
 export const getUsersById = ({ urlParams }: GetUsersByIdParams): User => {
   return axios.get(getUrlUsersById(urlParams), null);
 };
 
-// ## delete /users/{id} ##
+// ## DELETE /users/{id} ##
 
 export type DeleteUsersByIdParams = {
   urlParams: { id: number };
 };
 
 /**
- * delete /users/{id}
+ * DELETE /users/{id}
  * */
 export const deleteUsersById = ({ urlParams }: DeleteUsersByIdParams): undefined => {
   return axios.delete(getUrlUsersById(urlParams), null);
 };
 
-// ## post /users/batch ##
+// ## POST /users/batch ##
 
 export type PostUsersBatchParams = {
   body: Array<User>;
 };
 
 /**
- * post /users/batch
+ * POST /users/batch
  * */
 export const postUsersBatch = ({ body }: PostUsersBatchParams): Array<User> => {
   return axios.post(getUrlUsersBatch(), body);

@@ -4,7 +4,7 @@ import { resolve } from 'path';
 import { OpenAPIV3 } from 'openapi-types';
 import { TypesMap } from '#/transformJsonDocument/types';
 import { genCode, requestAxiosTemplate } from '#/__test__/e2e/templates';
-import { upperFirst, camelCase } from 'lodash';
+import { upperFirst, camelCase, toUpper } from 'lodash';
 import { ParameterInEnum } from '#/transformJsonDocument/utils/parametersToMap/parametersToMap.types';
 
 const openApiMock = readYaml(resolve(__dirname, '../../mock/openapi.mock.yaml')) as OpenAPIV3.Document;
@@ -78,7 +78,7 @@ export const toTypescriptFile = () => {
 
       return genCode(requestAxiosTemplate, {
         method,
-        methodCaps: method,
+        methodCaps: toUpper(method),
         params: paramsFields,
         paramsType,
         path,

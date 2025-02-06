@@ -1,12 +1,15 @@
-const axios: any = {};
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Full stages (Open API spec to code file) toCodeFile 1`] = `
+"const axios: any = {};
 
 type AnyObject = Record<string, any>;
 
 // ########################### url getters ↓
 
-export const getUrlUsers = () => `/users`;
-export const getUrlUsersById = ({ id }) => `/users/${id}`;
-export const getUrlUsersBatch = () => `/users/batch`;
+export const getUrlUsers = () => \`/users\`;
+export const getUrlUsersById = ({ id }) => \`/users/\${id}\`;
+export const getUrlUsersBatch = () => \`/users/batch\`;
 // ########################### types ↓
 
 export type Error = { code: number; message: string };
@@ -123,3 +126,5 @@ export type PostUsersBatchParams = {
 export const postUsersBatch = ({ body }: PostUsersBatchParams): Array<User> => {
   return axios.post(getUrlUsersBatch(), body);
 };
+"
+`;
