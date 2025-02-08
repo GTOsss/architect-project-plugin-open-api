@@ -4,17 +4,30 @@ exports[`toArrayTypes mock/cases schemes in responses200.yaml 1`] = `
 "export type User = {
   id: number;
   email: string;
-  name: string;
-  roleEnumUnnamed: 'user_role' | 'admin_role' | 'guest_role';
-  roleEnumReferenced: RoleEnum;
-  tags: Array<string>;
-  metadata: AnyObject;
-  birthDate: string;
-  score: number;
-  isActive: boolean;
-  address: Address;
+  name?: string;
+  nestedObj?: { name: string; nestedSecondLvl?: { end?: string } };
+  roleEnumUnnamed?: 'user_role' | 'admin_role' | 'guest_role';
+  roleEnumReferenced?: RoleEnum;
+  tags?: Array<string>;
+  metadata?: AnyObject;
+  birthDate?: string;
+  score?: number;
+  isActive?: boolean;
+  address?: Address;
 };
-export type Address = { street: string; city: string; country: string; zipCode: string };
+export type Address = { street?: string; city?: string; country?: string; zipCode?: string };
 export type RoleEnum = 'admin' | 'user' | 'guest';
+"
+`;
+
+exports[`toArrayTypes mock/cases schemes in responses200Extended.yaml 1`] = `
+"export type SimpleItem = { id?: number; name?: string };
+export type DetailedItem = { id?: number; name?: string; description?: string; price?: number };
+export type ArrayWithAnyOf = { filters?: Array<KeywordFilter | PriceFilter | CategoryFilter> };
+export type ArrayWithOneOf = { filters?: Array<KeywordFilter | PriceFilter | CategoryFilter> };
+export type ArrayWithAllOf = { filters?: Array<KeywordFilter & PriceFilter & CategoryFilter> };
+export type KeywordFilter = { keyword: string };
+export type PriceFilter = { minPrice: number; maxPrice: number };
+export type CategoryFilter = { category: string };
 "
 `;

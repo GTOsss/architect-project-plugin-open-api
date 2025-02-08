@@ -11,3 +11,15 @@ For correct applying eslint must be met conditions:
   > ![2.png](.readme/webstorm-settings-for-jest-with-eslint/2.png)
   > In field "Node options:" `--experimental-vm-modules`
   > ![3.png](.readme/webstorm-settings-for-jest-with-eslint/3.png)
+
+# Contributing
+
+## Public new version
+
+For publish new
+1. Increment version in package.json 
+2. Run command:
+   ```shell
+   npm publish
+   ```
+   It will run test → build → publish

@@ -1,0 +1,167 @@
+openapi: 3.0.0
+info:
+  title: Union and Intersection Types Example
+  version: 1.0.0
+
+paths:
+  /path-with-one-of:
+    post:
+      summary: One of example
+      parameters:
+        - name: itemId
+          in: path
+          required: true
+          description: The ID of the item. Can be either an integer or a string.
+          schema:
+            oneOf: # Represents the TypeScript "|" (union) operator
+              - type: integer
+              - type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              oneOf: # Represents the TypeScript "|" (union) operator
+                - $ref: '#/components/schemas/SimpleItem'
+                - $ref: '#/components/schemas/DetailedItem'
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                oneOf:  # Represents the TypeScript "|" (union) operator
+                  - $ref: '#/components/schemas/SimpleItem'
+                  - $ref: '#/components/schemas/DetailedItem'
+        '404':
+          description: Item not found
+
+  /path-with-any-of:
+    post:
+      summary: Any of example
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              anyOf: # Represents the TypeScript "|" (union) operator
+                - $ref: '#/components/schemas/SimpleItem'
+                - $ref: '#/components/schemas/DetailedItem'
+      responses:
+        '200':
+          description: Successful search
+          content:
+            application/json:
+              schema:
+                anyOf: # Represents the TypeScript "|" (union) operator
+                  - $ref: '#/components/schemas/SimpleItem'
+                  - $ref: '#/components/schemas/DetailedItem'
+
+  /path-with-all-of:
+    post:
+      summary: All of example
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              allOf: # Represents the TypeScript "&" (intersection) operator
+                - $ref: '#/components/schemas/SimpleItem'
+                - $ref: '#/components/schemas/DetailedItem'
+      responses:
+        '200':
+          description: Successful filter
+          content:
+            application/json:
+              schema:
+                allOf: # Represents the TypeScript "&" (intersection) operator
+                  - $ref: '#/components/schemas/SimpleItem'
+                  - $ref: '#/components/schemas/DetailedItem'
+
+components:
+  schemas:
+    SimpleItem:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+
+    DetailedItem:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        description:
+          type: string
+        price:
+          type: number
+          format: float
+
+    # Example of anyOf in Array
+    ArrayWithAnyOf:
+      type: object
+      properties:
+        filters:
+          type: array
+          items:
+            anyOf: # At least one of the filters must match
+              - $ref: '#/components/schemas/KeywordFilter'
+              - $ref: '#/components/schemas/PriceFilter'
+              - $ref: '#/components/schemas/CategoryFilter'
+
+    # Example of oneOf in Array
+    ArrayWithOneOf:
+      type: object
+      properties:
+        filters:
+          type: array
+          items:
+            oneOf: # At least one of the filters must match
+              - $ref: '#/components/schemas/KeywordFilter'
+              - $ref: '#/components/schemas/PriceFilter'
+              - $ref: '#/components/schemas/CategoryFilter'
+
+    # Example of oneOf in Array
+    ArrayWithAllOf:
+      type: object
+      properties:
+        filters:
+          type: array
+          items:
+            allOf: # At least one of the filters must match
+              - $ref: '#/components/schemas/KeywordFilter'
+              - $ref: '#/components/schemas/PriceFilter'
+              - $ref: '#/components/schemas/CategoryFilter'
+
+    KeywordFilter:
+      type: object
+      properties:
+        keyword:
+          type: string
+      required:
+        - keyword
+
+    PriceFilter:
+      type: object
+      properties:
+        minPrice:
+          type: number
+          format: float
+        maxPrice:
+          type: number
+          format: float
+      required:
+        - minPrice
+        - maxPrice
+
+    CategoryFilter:
+      type: object
+      properties:
+        category:
+          type: string
+      required:
+        - category

@@ -1,17 +1,16 @@
 import { OpenAPIV3 } from 'openapi-types';
 import { Config } from '../types';
 import { transformSchema } from '../utils/transformSchema';
-import { genCode } from '#/templates';
+import { GeneratedType } from './toArrayTypes.types';
 
 /**
  * Подробное описание логики функции в ./README.md
  * */
-export const toArrayTypes = (jsonDocument: OpenAPIV3.Document, config: Config): string[] => {
+export const toArrayTypes = (jsonDocument: OpenAPIV3.Document, config: Config): GeneratedType[] => {
   const schemas = jsonDocument.components.schemas;
   return Object.entries(schemas).reduce((acc, [schemaName, schemaData]) => {
     const typeValue = transformSchema(jsonDocument, schemaData, config);
-    const schemaType = genCode('export type ~name~ = ~typeValue~', { name: schemaName, typeValue });
-    acc.push(schemaType);
+    acc.push({ typeName: schemaName, typeValue });
     return acc;
-  }, [] as string[]);
+  }, [] as GeneratedType[]);
 };

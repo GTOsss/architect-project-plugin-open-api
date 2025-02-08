@@ -1,5 +1,4 @@
 import { OpenAPIV3 } from 'openapi-types';
-import HttpMethods = OpenAPIV3.HttpMethods;
 import { ParametersMap } from '../utils/parametersToMap/parametersToMap.types';
 
 /**
@@ -11,7 +10,7 @@ export type Method = {
   /**
    * OpenAPI field.
    * @example GET, POST, PUT, DELETE, etc */
-  method: HttpMethods;
+  method: OpenAPIV3.HttpMethods;
 
   /**
    * OpenAPI field.

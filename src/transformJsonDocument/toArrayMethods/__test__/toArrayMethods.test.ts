@@ -10,6 +10,9 @@ const openApiMock = readYaml(resolve(__dirname, '../../../mock/openapi.mock.yaml
 const openApiMockResponse200 = readYaml(
   resolve(__dirname, '../../../mock/cases/response200.yaml'),
 ) as OpenAPIV3.Document;
+const openApiMockResponse200Extended = readYaml(
+  resolve(__dirname, '../../../mock/cases/response200Extended.yaml'),
+) as OpenAPIV3.Document;
 
 const typesMap: TypesMap = {
   number: 'number',
@@ -25,6 +28,11 @@ const config = { typesMap };
 describe('toArrayMethods mock/cases', () => {
   it('responseTypes: responses200.yaml', () => {
     const result = toArrayMethods(openApiMockResponse200, config);
+    expect(result.map(({ responseType, path }) => ({ path, responseType }))).toMatchSnapshot();
+  });
+
+  it('responseTypes: response200Extended.yaml', () => {
+    const result = toArrayMethods(openApiMockResponse200Extended, config);
     expect(result.map(({ responseType, path }) => ({ path, responseType }))).toMatchSnapshot();
   });
 });

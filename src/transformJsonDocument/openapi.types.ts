@@ -8,6 +8,18 @@ export type OApiObjectSchema = Omit<OpenAPIV3.NonArraySchemaObject, 'type' | 'en
   type: 'object';
 };
 
+export type OApiAnyOfSchema = Omit<OpenAPIV3.NonArraySchemaObject, 'type' | 'enum' | 'anyOf' | 'allOf' | 'oneOf'> & {
+  anyOf: OpenAPIV3.BaseSchemaObject['anyOf'];
+};
+
+export type OApiOneOfSchema = Omit<OpenAPIV3.NonArraySchemaObject, 'type' | 'enum' | 'anyOf' | 'allOf' | 'oneOf'> & {
+  oneOf: OpenAPIV3.BaseSchemaObject['oneOf'];
+};
+
+export type OApiAllOfSchema = Omit<OpenAPIV3.NonArraySchemaObject, 'type' | 'enum' | 'anyOf' | 'allOf' | 'oneOf'> & {
+  allOf: OpenAPIV3.BaseSchemaObject['allOf'];
+};
+
 export type OApiAnyObjectSchema = Omit<OpenAPIV3.NonArraySchemaObject, 'type' | 'enum' | 'properties'> & {
   type: 'object';
 };

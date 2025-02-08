@@ -13,9 +13,5 @@
   },
   "include": ["src", "index.d.ts", "architect"],
   "exclude": ["src/**/*.test.ts"],
-  "references": [
-    {
-      "path": "./packages/back-dev-toolkit"
-    }
-  ]
+  "references": []
 }

@@ -17,7 +17,9 @@ export default tseslint.config(
         ...globals.jest
       }
     },
-    rules: {}
+    rules: {
+        '@typescript-eslint/no-require-imports': 0,
+    }
   }
 );
 

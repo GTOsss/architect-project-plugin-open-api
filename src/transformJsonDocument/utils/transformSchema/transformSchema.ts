@@ -1,15 +1,25 @@
 import { OpenAPIV3 } from 'openapi-types';
 import {
+  isAllOfSchema,
   isAnyObjectSchema,
+  isAnyOfSchema,
   isArraySchema,
   isEnumSchema,
   isObjectSchema,
+  isOneOfSchema,
   isPrimitiveSchema,
 } from '../../openapi.typeGuards';
 import { getSchemaNameByRef } from '../ref';
 import { isRefObject } from '../ref/ref.typeGuards';
 import { Config } from '../../types';
-import { OApiEnumSchema, OApiObjectSchema, OApiPrimitiveSchema } from '../../openapi.types';
+import {
+  OApiAllOfSchema,
+  OApiAnyOfSchema,
+  OApiEnumSchema,
+  OApiObjectSchema,
+  OApiOneOfSchema,
+  OApiPrimitiveSchema,
+} from '../../openapi.types';
 
 /**
  * Создает тип enum. OpenAPI не позволяет сделать именованные значения enum как в  typescript:
@@ -63,14 +73,30 @@ const createTypeAnyObject = (config: Config) => {
  * */
 const createTypeObject = (jsonDocument: OpenAPIV3.Document, schema: OApiObjectSchema, config: Config): string => {
   /**
+   * Будет хранить мап-объект с полями которые обязательны, если такого поля нет в объекте, оно не обязательно.
+   * @example
+   * const requiredMap = {
+   *   name: true,
+   * }
+   * */
+  const requiredMap = (schema.required || []).reduce(
+    (acc, field) => {
+      acc[field] = true;
+      return acc;
+    },
+    {} as Record<string, boolean>,
+  );
+
+  /**
    * Будет хранить массив строк в формате "поле: значение"
    * @example
    * ["fieldA: number", "fieldB: User", "fieldObj: { a: string }" ]
    * */
   const typeFields = Object.entries(schema.properties).reduce((acc, [fieldName, fieldSchema]) => {
     const fieldType = transformSchema(jsonDocument, fieldSchema, config);
-
-    acc.push(`${fieldName}: ${fieldType}`);
+    const isRequired = requiredMap[fieldName];
+    const optionalFlag = isRequired ? '' : '?';
+    acc.push(`${fieldName}${optionalFlag}: ${fieldType}`);
     return acc;
   }, [] as string[]);
 
@@ -107,6 +133,21 @@ const createTypeArray = (
   return `Array<${transformSchema(jsonDocument, schema.items, config)}>`;
 };
 
+const createTypeOneOf = (jsonDocument: OpenAPIV3.Document, schema: OApiOneOfSchema, config: Config) => {
+  const types = schema.oneOf.map((schema) => transformSchema(jsonDocument, schema, config));
+  return types.join(' | ');
+};
+
+const createTypeAnyOf = (jsonDocument: OpenAPIV3.Document, schema: OApiAnyOfSchema, config: Config) => {
+  const types = schema.anyOf.map((schema) => transformSchema(jsonDocument, schema, config));
+  return types.join(' | ');
+};
+
+const createTypeAllOf = (jsonDocument: OpenAPIV3.Document, schema: OApiAllOfSchema, config: Config) => {
+  const types = schema.allOf.map((schema) => transformSchema(jsonDocument, schema, config));
+  return types.join(' & ');
+};
+
 const createAnyType = (config: Config) => {
   return config.typesMap['*'];
 };
@@ -139,6 +180,12 @@ export const transformSchema = (
     return createTypeArray(jsonDocument, schema, config); // Array<User>
   } else if (isEnumSchema(schema)) {
     return createTypeEnum(schema); // "'user_role' | 'admin_role'"
+  } else if (isOneOfSchema(schema)) {
+    return createTypeOneOf(jsonDocument, schema, config); // "string | number | User"
+  } else if (isAnyOfSchema(schema)) {
+    return createTypeAnyOf(jsonDocument, schema, config); // "string | number | User"
+  } else if (isAllOfSchema(schema)) {
+    return createTypeAllOf(jsonDocument, schema, config); // "User & UserDetailed"
   }
 
   return createAnyType(config); // any

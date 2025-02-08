@@ -3,6 +3,7 @@
 exports[`toArrayMethods by openapi.mock.json DELETE /users/{id} 1`] = `
 {
   "description": undefined,
+  "generatedMethodName": "usersById",
   "method": "delete",
   "parametersMap": {
     "header": [
@@ -24,15 +25,18 @@ exports[`toArrayMethods by openapi.mock.json DELETE /users/{id} 1`] = `
     "query": [],
   },
   "path": "/users/{id}",
+  "requestBodyType": undefined,
   "responseType": undefined,
   "summary": "Delete user",
   "tags": undefined,
+  "urlGetter": "deleteUsersById = ({ id }: Record<string, string | number>) => \`/users/\${id}\`",
 }
 `;
 
 exports[`toArrayMethods by openapi.mock.json GET /users 1`] = `
 {
   "description": undefined,
+  "generatedMethodName": "users",
   "method": "get",
   "parametersMap": {
     "header": [
@@ -63,12 +67,14 @@ exports[`toArrayMethods by openapi.mock.json GET /users 1`] = `
   "responseType": "Array<User>",
   "summary": "List users",
   "tags": undefined,
+  "urlGetter": "getUsers = () => \`/users\`",
 }
 `;
 
 exports[`toArrayMethods by openapi.mock.json PATCH /users/{id} 1`] = `
 {
   "description": undefined,
+  "generatedMethodName": "usersById",
   "method": "patch",
   "parametersMap": {
     "header": [
@@ -90,15 +96,18 @@ exports[`toArrayMethods by openapi.mock.json PATCH /users/{id} 1`] = `
     "query": [],
   },
   "path": "/users/{id}",
+  "requestBodyType": "{ name?: string,role?: "admin" | "user" | "guest" }",
   "responseType": "User",
   "summary": "Partially update user",
   "tags": undefined,
+  "urlGetter": "patchUsersById = ({ id }: Record<string, string | number>) => \`/users/\${id}\`",
 }
 `;
 
 exports[`toArrayMethods by openapi.mock.json POST /users 1`] = `
 {
   "description": undefined,
+  "generatedMethodName": "users",
   "method": "post",
   "parametersMap": {
     "header": [
@@ -113,15 +122,18 @@ exports[`toArrayMethods by openapi.mock.json POST /users 1`] = `
     "query": [],
   },
   "path": "/users",
+  "requestBodyType": "{ email: string,name?: string,role?: "user" | "guest" }",
   "responseType": "User",
   "summary": "Create user",
   "tags": undefined,
+  "urlGetter": "postUsers = () => \`/users\`",
 }
 `;
 
 exports[`toArrayMethods by openapi.mock.json PUT /users/{id} 1`] = `
 {
   "description": undefined,
+  "generatedMethodName": "usersById",
   "method": "put",
   "parametersMap": {
     "header": [
@@ -143,10 +155,29 @@ exports[`toArrayMethods by openapi.mock.json PUT /users/{id} 1`] = `
     "query": [],
   },
   "path": "/users/{id}",
+  "requestBodyType": "User",
   "responseType": "User",
   "summary": "Update user",
   "tags": undefined,
+  "urlGetter": "putUsersById = ({ id }: Record<string, string | number>) => \`/users/\${id}\`",
 }
+`;
+
+exports[`toArrayMethods mock/cases responseTypes: response200Extended.yaml 1`] = `
+[
+  {
+    "path": "/path-with-one-of",
+    "responseType": "SimpleItem | DetailedItem",
+  },
+  {
+    "path": "/path-with-any-of",
+    "responseType": "SimpleItem | DetailedItem",
+  },
+  {
+    "path": "/path-with-all-of",
+    "responseType": "SimpleItem & DetailedItem",
+  },
+]
 `;
 
 exports[`toArrayMethods mock/cases responseTypes: responses200.yaml 1`] = `

@@ -72,7 +72,7 @@ export const toArrayMethods = (jsonDocument: OpenAPIV3.Document, config: Config)
 
       const generatedMethodName = methodNameByPath(path);
 
-      const urlGetter = urlGetterByPath(path);
+      const urlGetter = urlGetterByPath(path, method);
 
       acc.push({
         generatedMethodName,

@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`urlGetterByPath should create url getter function for /users 1`] = `"export const users = ({}) => \`/users\`"`;
+exports[`urlGetterByPath should create url getter function for /users 1`] = `"getUsers = () => \`/users\`"`;
 
-exports[`urlGetterByPath should create url getter function for /users/{userId} 1`] = `"export const usersByUserId = ({}) => \`/users/\${userId}\`"`;
+exports[`urlGetterByPath should create url getter function for /users/{userId} 1`] = `"getUsersByUserId = ({ userId }: Record<string, string | number>) => \`/users/\${userId}\`"`;
 
-exports[`urlGetterByPath should create url getter function for /users/{userId}/groups/{groupId} 1`] = `"export const usersByUserIdGroupsByGroupId = ({}) => \`/users/\${userId}/groups/\${groupId}\`"`;
+exports[`urlGetterByPath should create url getter function for /users/{userId}/groups/{groupId} 1`] = `"getUsersByUserIdGroupsByGroupId = ({ userId,groupId }: Record<string, string | number>) => \`/users/\${userId}/groups/\${groupId}\`"`;

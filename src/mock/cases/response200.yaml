@@ -44,6 +44,8 @@ components:
         # Для проверки неименованной схемы (которая не вынесена отдельно)
         nestedObj:
           type: object
+          required:
+            - name
           properties:
             name:
               type: string

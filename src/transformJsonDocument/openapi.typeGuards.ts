@@ -1,9 +1,12 @@
 import { AnyObject, isHasFields, isHasNotFields, isObject, isString } from '#/common/types/common';
 import {
+  OApiAllOfSchema,
   OApiAnyObjectSchema,
+  OApiAnyOfSchema,
   OApiArraySchema,
   OApiEnumSchema,
   OApiObjectSchema,
+  OApiOneOfSchema,
   OApiPrimitiveSchema,
 } from './openapi.types';
 
@@ -22,6 +25,18 @@ export const isPrimitiveSchema = (schema: AnyObject): schema is OApiPrimitiveSch
  * */
 export const isObjectSchema = (schema: AnyObject): schema is OApiObjectSchema => {
   return isHasFields(schema, 'type', 'properties') && schema.type === 'object';
+};
+
+export const isOneOfSchema = (schema: AnyObject): schema is OApiOneOfSchema => {
+  return isHasFields(schema, 'oneOf');
+};
+
+export const isAnyOfSchema = (schema: AnyObject): schema is OApiAnyOfSchema => {
+  return isHasFields(schema, 'anyOf');
+};
+
+export const isAllOfSchema = (schema: AnyObject): schema is OApiAllOfSchema => {
+  return isHasFields(schema, 'allOf');
 };
 
 /**

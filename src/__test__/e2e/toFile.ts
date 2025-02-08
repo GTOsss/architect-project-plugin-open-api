@@ -6,6 +6,9 @@ import { TypesMap } from '#/transformJsonDocument/types';
 import { genCode, requestAxiosTemplate } from '#/__test__/e2e/templates';
 import { upperFirst, camelCase, toUpper } from 'lodash';
 import { ParameterInEnum } from '#/transformJsonDocument/utils/parametersToMap/parametersToMap.types';
+import { createGeneratorStrByTemplate } from 'architect-project';
+
+const genCodeT = createGeneratorStrByTemplate({ itrStart: '~', itrEnd: '~' });
 
 const openApiMock = readYaml(resolve(__dirname, '../../mock/openapi.mock.yaml')) as OpenAPIV3.Document;
 
@@ -23,7 +26,12 @@ const config = { typesMap };
 const headerOfFile = `const axios: any = {};\n\ntype AnyObject = Record<string, any>\n`;
 
 export const toTypescriptFile = () => {
-  const typesCode = toArrayTypes(openApiMock, config).join('\n\n');
+  const arrayTypes = toArrayTypes(openApiMock, config);
+  const typesCode = arrayTypes
+    .map(({ typeName, typeValue }) => {
+      return genCodeT('export type ~typeName~ = ~typeValue~', { typeName, typeValue });
+    })
+    .join('\n\n');
 
   const methods = toArrayMethods(openApiMock, config);
   const methodsCode = methods
@@ -67,7 +75,7 @@ export const toTypescriptFile = () => {
         .join();
 
       const requestArguments = [
-        `getUrl${upperFirst(generatedMethodName)}(${urlParamsTypes ? 'urlParams' : ''})`,
+        `getUrl${upperFirst(method)}${upperFirst(generatedMethodName)}(${urlParamsTypes ? 'urlParams' : ''})`,
         requestBodyType ? 'body' : 'null',
         queryParamsTypes ? `{ params: queryParams }` : '',
       ]

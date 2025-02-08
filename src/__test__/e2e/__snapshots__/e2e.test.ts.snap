@@ -7,27 +7,31 @@ type AnyObject = Record<string, any>;
 
 // ########################### url getters ↓
 
-export const getUrlUsers = () => \`/users\`;
-export const getUrlUsersById = ({ id }) => \`/users/\${id}\`;
-export const getUrlUsersBatch = () => \`/users/batch\`;
+export const getUrlPostUsers = () => \`/users\`;
+export const getUrlGetUsers = () => \`/users\`;
+export const getUrlPutUsersById = ({ id }: Record<string, string | number>) => \`/users/\${id}\`;
+export const getUrlPatchUsersById = ({ id }: Record<string, string | number>) => \`/users/\${id}\`;
+export const getUrlGetUsersById = ({ id }: Record<string, string | number>) => \`/users/\${id}\`;
+export const getUrlDeleteUsersById = ({ id }: Record<string, string | number>) => \`/users/\${id}\`;
+export const getUrlPostUsersBatch = () => \`/users/batch\`;
 // ########################### types ↓
 
 export type Error = { code: number; message: string };
 
-export type Address = { street: string; city: string; country: string; zipCode: string };
+export type Address = { street?: string; city?: string; country?: string; zipCode?: string };
 
 export type User = {
   id: number;
   email: string;
-  name: string;
-  role: 'user_role' | 'admin_role' | 'guest_role';
-  address: Address;
-  tags: Array<string>;
-  metadata: AnyObject;
-  birthDate: string;
-  createdAt: string;
-  score: number;
-  isActive: boolean;
+  name?: string;
+  role?: 'user_role' | 'admin_role' | 'guest_role';
+  address?: Address;
+  tags?: Array<string>;
+  metadata?: AnyObject;
+  birthDate?: string;
+  createdAt?: string;
+  score?: number;
+  isActive?: boolean;
 };
 
 export type RefToUser = User;
@@ -37,14 +41,14 @@ export type RefToUser = User;
 // ## POST /users ##
 
 export type PostUsersParams = {
-  body: { email: string; name: string; role: 'user' | 'guest' };
+  body: { email: string; name?: string; role?: 'user' | 'guest' };
 };
 
 /**
  * POST /users
  * */
 export const postUsers = ({ body }: PostUsersParams): User => {
-  return axios.post(getUrlUsers(), body);
+  return axios.post(getUrlPostUsers(), body);
 };
 
 // ## GET /users ##
@@ -57,7 +61,7 @@ export type GetUsersParams = {
  * GET /users
  * */
 export const getUsers = ({ queryParams }: GetUsersParams): Array<User> => {
-  return axios.get(getUrlUsers(), null, { params: queryParams });
+  return axios.get(getUrlGetUsers(), null, { params: queryParams });
 };
 
 // ## PUT /users/{id} ##
@@ -71,21 +75,21 @@ export type PutUsersByIdParams = {
  * PUT /users/{id}
  * */
 export const putUsersById = ({ urlParams, body }: PutUsersByIdParams): User => {
-  return axios.put(getUrlUsersById(urlParams), body);
+  return axios.put(getUrlPutUsersById(urlParams), body);
 };
 
 // ## PATCH /users/{id} ##
 
 export type PatchUsersByIdParams = {
   urlParams: { id: number };
-  body: { name: string; role: 'admin' | 'user' | 'guest' };
+  body: { name?: string; role?: 'admin' | 'user' | 'guest' };
 };
 
 /**
  * PATCH /users/{id}
  * */
 export const patchUsersById = ({ urlParams, body }: PatchUsersByIdParams): User => {
-  return axios.patch(getUrlUsersById(urlParams), body);
+  return axios.patch(getUrlPatchUsersById(urlParams), body);
 };
 
 // ## GET /users/{id} ##
@@ -98,7 +102,7 @@ export type GetUsersByIdParams = {
  * GET /users/{id}
  * */
 export const getUsersById = ({ urlParams }: GetUsersByIdParams): User => {
-  return axios.get(getUrlUsersById(urlParams), null);
+  return axios.get(getUrlGetUsersById(urlParams), null);
 };
 
 // ## DELETE /users/{id} ##
@@ -111,7 +115,7 @@ export type DeleteUsersByIdParams = {
  * DELETE /users/{id}
  * */
 export const deleteUsersById = ({ urlParams }: DeleteUsersByIdParams): undefined => {
-  return axios.delete(getUrlUsersById(urlParams), null);
+  return axios.delete(getUrlDeleteUsersById(urlParams), null);
 };
 
 // ## POST /users/batch ##
@@ -124,7 +128,7 @@ export type PostUsersBatchParams = {
  * POST /users/batch
  * */
 export const postUsersBatch = ({ body }: PostUsersBatchParams): Array<User> => {
-  return axios.post(getUrlUsersBatch(), body);
+  return axios.post(getUrlPostUsersBatch(), body);
 };
 "
 `;
