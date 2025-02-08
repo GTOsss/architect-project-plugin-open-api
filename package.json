@@ -1,6 +1,6 @@
 {
   "name": "architect-project-plugin-open-api",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "type": "module",
   "scripts": {
     "test": "cross-env NODE_OPTIONS=\"$NODE_OPTIONS --experimental-vm-modules\" jest",
@@ -15,6 +15,7 @@
     "dist-types",
     "public.d.ts"
   ],
+  "repository": "https://github.com/GTOsss/architect-project-plugin-open-api",
   "types": "./public.d.ts",
   "main": "dist/index.cjs.js",
   "module": "dist/index.esm.js",
